@@ -1,0 +1,8 @@
+build:
+  docker:
+    web: Dockerfile
+  config:
+    ENV: production
+
+run:
+  web: gunicorn myproject.wsgi:application --log-file -
