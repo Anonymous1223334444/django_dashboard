@@ -1,0 +1,38 @@
+#header {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    background: #000000;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+div.breadcrumbs {
+    background: #2c2c2c;
+    padding: 10px 40px;
+    border: none;
+    color: #ffffff;
+    text-align: left;
+}
+
+.login .submit-row {
+    padding: 0 !important;
+}
+
+input[type=submit], input[type=button], .submit-row input, a.button {
+    width: 100%;
+}
+
+.module caption, .inline-group h2 {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    background-color: #2c2c2c;
+    text-transform: uppercase;
+}
+
+.module h2, .module caption, .inline-group h2 {
+    background-color: #2c2c2c;
+}

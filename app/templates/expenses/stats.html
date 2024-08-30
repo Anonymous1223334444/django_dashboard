@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="row g-0" style="display: flex; padding: 1rem;">
+        <div class="col-sm-6 col-md-10">
+            <div class="col-md-3" >
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'expenses' %}">Summary</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Expenses</li>
+                    </ol>
+                </nav> 
+            </div>
+        </div>  
+
+        <div class="col-6 col-md-2">
+            <a href="{% url 'expenses' %}" class="btn btn-primary">BACK</a>
+        </div>
+        <canvas id="mychart" width="400" height="400"></canvas>
+    </div>
+
+
+    <script src="{% static 'js/user/stats.js' %}"></script>        
+
+{% endblock %}

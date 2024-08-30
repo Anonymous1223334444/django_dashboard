@@ -1,0 +1,37 @@
+    version: '3.9'
+
+    services:
+      dashboard:
+        container_name: dashboard
+        build:
+          context: .
+        ports:
+          - 8000:8000
+        volumes:
+          - ./app:/app
+        command: >
+          sh -c "python manage.py runserver 0.0.0.0:8000"     
+        environment:
+          - DB_HOST=dashboard_db
+          - DB_NAME=devdb
+          - DB_USER=devuser
+          - DB_PASS=changeme
+          - EMAIL_HOST=smtp.gmail.com   
+          - EMAIL_HOST_USER=replit005@gmail.com
+          - DEFAULT_FROM_EMAIL=replit005@gmail.com
+          - EMAIL_HOST_PASSWORD=gizs girb ltha nrym
+        depends_on:
+          - dashboard_db
+
+
+      dashboard_db:
+        image: postgres:13-alpine
+        volumes:
+          - dev-db-data:/var/lib/postgresql/data
+        environment:
+          - POSTGRES_DB=devdb
+          - POSTGRES_USER=devuser
+          - POSTGRES_PASSWORD=changeme
+
+    volumes:
+      dev-db-data:

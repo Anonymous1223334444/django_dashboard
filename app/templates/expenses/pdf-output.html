@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="{% static 'js/bootstrap/chart.umd.js' %}"></script>
+    <script src="{% static 'js/bootstrap/color-modes.js' %}"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Output</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style>
+        @page {
+            size: 'A4';
+            margin: 2.5cm 1.5cm 3.5cm 1.5cm;
+
+            @top-center {
+                content: "Company Name";
+            }
+
+            @bottom-right {
+                content: "Page " counter(page)" of " counter(pages);
+            }
+        }
+    </style>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap-icons.min.css' %}" rel="stylesheet">
+
+</head>
+<body>
+    <img src="https://images-platform.99static.com//Gz9su2y6lfEKJDkwAMRJ1oYDa7M=/303x224:2183x2101/fit-in/500x500/projects-files/79/7947/794710/16582d52-f8cd-4484-8f4a-130f3f1137a0.png" width="20" height="20" alt="Logo">
+    <h2>Expense List</h2>
+
+    <table class="table table-stripped table-hover">
+        <thead class="thead">
+            <tr>
+                <th>No</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ expense.amount }}</td>
+                <td>{{ expense.category }}</td>
+                <td>{{ expense.date }}</td>
+                <td>{{ expense.description }}</td>
+            </tr>
+            {% endfor %}
+
+            <tr>
+                <td>Total</td>
+                <td>{{ total }}</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+<script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+
+<script src="{% static 'js/bootstrap/dashboard.js' %}"></script>
+</html>

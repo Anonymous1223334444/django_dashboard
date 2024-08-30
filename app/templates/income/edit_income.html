@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-md-10">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'income' %}">Income</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">My Income</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-md-2" style="margin-left: 0;">
+            <a href="{% url 'income_delete' income.id %}" class="btn btn-danger btn-sm">Delete</a>
+        </div>
+    </div>
+
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'income-edit' income.id %}" style="display: flex; flex-direction: column; gap: 1rem;" method="POST">
+                    {% include 'partials/_messages.html' %} 
+                    {% csrf_token %}
+                    <div class="form-group" style="display: flex; flex-direction: column; gap: 0.4rem;">
+                        <label for="amount">Amount</label>
+                        <input type="number" class="form-control form-control-sm" id="amount" name="amount" value="{{ values.amount }}">
+                    </div>
+                    <div class="form-group" style="display: flex; flex-direction: column; gap: 0.4rem;">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control form-control-sm" value="{{ values.description }}" id="description" name="description">
+                    </div>
+                    <div class="form-group" style="display: flex; flex-direction: column; gap: 0.4rem;">
+                        <label for="income_date">Date of income</label>
+                        <input type="date" value="{{ values.date | date:'Y-m-d' }}" class="form-control form-control-sm" id="income_date" name="income_date">
+                    </div>
+                    <div class="form-group" style="display: flex; flex-direction: column; gap: 0.4rem;">
+                        <label for="source">Source</label> 
+                        <select class="form-select" name="source">
+                            <option selected name="source" value="{{ values.source }}">{{ values.source }}</option>
+                            {% for source in source %}
+                                <option name="source" value="{{ source.name }}">{{ source.name }}</option>
+                            {% endfor %}
+                        </select> 
+                    </div>  
+                    <input type="submit" value="Save" class="btn btn-primary btn-primary-sm">
+                </form>
+            </div>
+        </div>
+</div>
+
+
+{% endblock %}
