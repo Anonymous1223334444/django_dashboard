@@ -67,3 +67,16 @@
 `exit()`
 
 ### For use smtplib to automatically send email, you have to define apps passwords to your project instead of the password of your account
+
+## Host the django app deployed with docker on heroku
+- heroku login
+- heroku create your-app-name
+- heroku stack:set container -a your-app-name
+- heroku config:set DEBUG=False ALLOWED_HOSTS=your-app-name.herokuapp.com SECRET_KEY=your-secret-key -a your-app-name
+- create heroku.yml file
+- heroku container:push web -a your-app-name
+- heroku container:release web -a your-app-name
+- after launching docker engine and build the image: heroku container:login
+- heroku container:push web --app django-dashboard-docker
+- docker tag your-app-name registry.heroku.com/django-dashboard-docker/web
+- docker push registry.heroku.com/django-dashboard-docker/web
