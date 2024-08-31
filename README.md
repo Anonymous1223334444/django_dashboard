@@ -72,7 +72,8 @@
 - heroku login
 - heroku create your-app-name
 - heroku stack:set container -a your-app-name
-- heroku config:set DEBUG=False ALLOWED_HOSTS=your-app-name.herokuapp.com SECRET_KEY=your-secret-key -a your-app-name
+- heroku config:set DEBUG=False ALLOWED_HOSTS="django-dashboard-docker-2d6c094b404f.herokuapp.com" -a django-dashboard-docker
+- heroku config --app django-dashboard-docker
 - create heroku.yml file
 - heroku container:push web -a your-app-name
 - heroku container:release web -a your-app-name
