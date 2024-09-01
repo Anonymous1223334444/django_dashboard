@@ -108,11 +108,17 @@
 
   ## Connect your postgres ec2 to the heroku app 
   - heroku config:set DB_HOST="ec2-3-93-6-22.compute-1.amazonaws.com" DB_NAME="dashboard_db" DB_USER="dashboard_user" DB_PASS="changeme" --app django-dashboard-docker
+  - heroku config:set DATABASE_URL='postgres://dashboard_user:changeme@ec2-3-93-6-22.compute-1.amazonaws.com:5432/dashboard_db'
+  - export DATABASE_URL='postgres://dashboard_user:changeme@ec2-3-93-6-22.compute-1.amazonaws.com:5432/dashboard_db'
   - git push heroku master
   - Reconnect to the amazon ec2 instance from terminal
   - type: psql -h ec2-3-93-6-22.compute-1.amazonaws.com -U dashboard_user -d dashboard_db
   - type: GRANT ALL PRIVILEGES ON SCHEMA public TO dashboard_user;
+  - psql -U dashboard_user -d dashboard_db -c "GRANT ALL ON ALL TABLES IN SCHEMA public to dashboard_user;"
+  - psql -U dashboard_user -d dashboard_db -c "GRANT ALL ON ALL SEQUENCES IN SCHEMA public to dashboard_user;"
+  - psql -U dashboard_user -d dashboard_db -c "GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to dashboard_user;"
   - GRANT ALL PRIVILEGES ON DATABASE dashboard_db TO dashboard_user;
+  - heroku run python manage.py collectstatic --noinput --app django-dashboard-docker
   - heroku run python manage.py migrate --app django-dashboard-docker
 
     ## Verify if the django app is linked with the postgres database
